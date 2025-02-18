@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Pending Approvals</h2>
+    <h2>Pending Approvals for HOD</h2>
     <div class="row">
         <div class="col-md-12">
             {% if pending_applications %}
@@ -28,7 +28,7 @@
                         <td>{{ application.departure_date }}</td>
                         <td>{{ application.status }}</td>
                         <td>
-                            <form method="POST" action="{{ url_for('faculty.approve_application', application_id=application.id) }}">
+                            <form method="POST" action="{{ url_for('faculty.hod_approve_application', application_id=application.id) }}">
                                 <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">Approve</button>
                                 <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">Reject</button>
                             </form>

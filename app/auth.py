@@ -44,7 +44,9 @@ def login():
                 session['user_role'] = 'caretaker'
                 return redirect(url_for("caretaker.profile"))
             elif Faculty.query.filter_by(faculty_id=user.id).first():
+                faculty = Faculty.query.filter_by(faculty_id=user.id).first()
                 session['user_role'] = 'faculty'
+                session['is_hod'] = faculty.is_hod
                 return redirect(url_for("faculty.profile"))
             elif Admin.query.filter_by(admin_id=user.id).first():
                 session['user_role'] = 'admin'
@@ -127,5 +129,6 @@ def register():
 def logout():
     session.pop('user_id', None)
     session.pop('user_role', None)
+    session.pop('is_hod', None)
     flash("You have been logged out.", "success")
     return redirect(url_for("auth.login"))

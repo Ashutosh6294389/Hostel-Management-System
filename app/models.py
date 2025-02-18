@@ -110,3 +110,21 @@ class ApplicationFinal(db.Model):
     application_id = db.Column(db.Integer, db.ForeignKey('application.application_id', ondelete='CASCADE'), primary_key=True)
     hostel_no = db.Column(db.String(20), db.ForeignKey('hostel.hostel_no', ondelete='CASCADE'))
     room_no = db.Column(db.String(20), db.ForeignKey('room.room_no', ondelete='CASCADE'))
+
+class InternshipApplication(db.Model):
+    __tablename__ = 'internship_application'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    gender = db.Column(db.String(20), nullable=False)
+    affiliation = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(200), nullable=False)
+    contact_number = db.Column(db.String(15), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    faculty_mentor = db.Column(db.String(100), nullable=False)
+    faculty_email = db.Column(db.String(100), nullable=False)
+    arrival_date = db.Column(db.Date, nullable=False)
+    departure_date = db.Column(db.Date, nullable=False)
+    id_card = db.Column(db.String(100), nullable=False)
+    official_letter = db.Column(db.String(100), nullable=False)
+    remarks = db.Column(db.String(300))
+    status = db.Column(db.String(50), default="Pending Faculty Approval", nullable=False)

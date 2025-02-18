@@ -68,6 +68,11 @@
     <a href="/faculty/pending_approvals">
         <img src="{{ url_for('static', filename='icons/pending_approvals_icon.png') }}" alt="Pending Approvals Icon">Pending Approvals
     </a>
+    {% if session.get('user_role') == 'faculty' and session.get('is_hod') %}
+    <a href="/faculty/hod_pending_approvals">
+        <img src="{{ url_for('static', filename='icons/hod_pending_approvals_icon.png') }}" alt="HOD Pending Approvals Icon">HOD Pending Approvals
+    </a>
+    {% endif %}
     <a href="/logout">
         <img src="{{ url_for('static', filename='icons/logout_icon.png') }}" alt="Logout Icon">Logout
     </a>
