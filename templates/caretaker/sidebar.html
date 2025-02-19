@@ -1,8 +1,8 @@
 <style>
     .sidebar {
         width: 260px;
-        background-color: #356e57; 
-        color: #ecf0f1;
+        background-color: #2b5586; 
+        color: #ecf0f1;  
         position: fixed;
         height: 100%;
         display: flex;
@@ -17,7 +17,7 @@
         font-size: 1.6rem;
         font-weight: bold;
         margin: 0; 
-        background-color: #1e4a38; 
+        background-color: #0f2a45; 
         color: #ffffff; 
         padding: 20px 0; 
         text-transform: uppercase;
@@ -43,13 +43,13 @@
     }
 
     .sidebar a:hover {
-        background-color: #28a745; 
-        color: #1e4a38; 
+        background-color: #3498db; 
+        color: #1e3a5f; 
         transform: scale(0.95);
     }
 
     .sidebar a:active {
-        background-color: #218838; 
+        background-color: #2980b9; 
         color: #ffffff;
     }
 
@@ -64,6 +64,15 @@
     <h3>Caretaker Dashboard</h3>
     <a href="/caretaker">
         <img src="{{ url_for('static', filename='icons/profile_icon.png') }}" alt="Profile Icon">Manage Profile
+    </a>
+    <a href="/caretaker/pending_approvals">
+        <img src="{{ url_for('static', filename='icons/pending_approvals_icon.png') }}" alt="Pending Approvals Icon">Pending Approvals
+    </a>
+    <a href="/caretaker/rooms">
+        <img src="{{ url_for('static', filename='icons/rooms_icon.png') }}" alt="Rooms Icon">All Rooms
+    </a>
+    <a href="/caretaker/vacant_rooms">
+        <img src="{{ url_for('static', filename='icons/vacant_rooms_icon.png') }}" alt="Vacant Rooms Icon">Vacant Rooms
     </a>
     <a href="/logout">
         <img src="{{ url_for('static', filename='icons/logout_icon.png') }}" alt="Logout Icon">Logout

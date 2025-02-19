@@ -19,7 +19,9 @@ def profile():
     if user is None or student is None:
         return redirect(url_for('auth.login'))
 
-    return render_template("student/profile.html", user=user, student=student)
+    internship_application = InternshipApplication.query.filter_by(email=user.email).first()
+
+    return render_template("student/profile.html", user=user, student=student, internship_application=internship_application)
 
 @student_bp.route("/student/internship_form", methods=["GET"])
 def internship_form():

@@ -1,0 +1,51 @@
+{% extends "caretaker/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Pending Approvals</h2>
+    <div class="row">
+        <div class="col-md-12">
+            {% if pending_applications %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Student Name</th>
+                        <th>Department</th>
+                        <th>Arrival</th>
+                        <th>Departure</th>
+                        <th>Status</th>
+                        <th>Room No</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in pending_applications %}
+                    <tr>
+                        <td>{{ application.id }}</td>
+                        <td>{{ application.name }}</td>
+                        <td>{{ application.affiliation }}</td>
+                        <td>{{ application.arrival_date }}</td>
+                        <td>{{ application.departure_date }}</td>
+                        <td>{{ application.status }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('caretaker.approve_application', application_id=application.id) }}">
+                                <input type="text" name="room_no" class="form-control" placeholder="Enter Room No" required>
+                        </td>
+                        <td>
+                                <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                No pending requests.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
