@@ -1,0 +1,74 @@
+{% extends "faculty/base.html" %}
+
+{% block content %}
+<div class="container mt-0">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Profile Card -->
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="name" class="fw-bold">Name</label>
+                                    <input type="text" class="form-control" id="name" value="{{ user.name }}" readonly>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="email" class="fw-bold">Email</label>
+                                    <input type="email" class="form-control" id="email" value="{{ user.email }}" readonly>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="department" class="fw-bold">Department</label>
+                                    <input type="text" class="form-control" id="department" value="{{ faculty.department }}" readonly>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="faculty_phone" class="fw-bold">Phone</label>
+                                    <input type="text" class="form-control" id="faculty_phone" value="{{ faculty.faculty_phone }}" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <h5 class="fw-bold">Current Signature</h5>
+                                <div class="signature-box border rounded p-3 bg-light">
+                                    {% if faculty.signature %}
+                                        <img src="{{ url_for('faculty.get_signature', faculty_id=faculty.faculty_id) }}" 
+                                             alt="Signature" class="img-fluid rounded shadow-sm">
+                                    {% else %}
+                                        <p class="text-muted">No signature uploaded.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr class="my-4">
+
+                        <!-- Upload Section -->
+                        <div class="form-group text-center">
+                            <label for="signature" class="fw-bold">Upload New Signature</label>
+                            <input type="file" class="form-control-file form-control mt-2" id="signature" name="signature">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-lg btn-success shadow-sm px-4">
+                                <i class="fas fa-upload"></i> Update Signature
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Some Custom Styling -->
+<style>
+    .signature-box {
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+{% endblock %}

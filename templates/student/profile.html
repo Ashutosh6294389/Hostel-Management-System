@@ -1,0 +1,32 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="row d-flex align-items-stretch"> <!-- Ensures equal height -->
+                
+                <!-- Profile Card -->
+                <div class="col-md-6">
+                    <div class="card p-4 shadow-sm text-center h-100"> <!-- h-100 ensures same height -->
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ url_for('static', filename='profile_pic.png') }}" class="rounded-circle shadow-sm mb-3" width="80" height="80" alt="Profile Picture">
+                        </div>
+                        <h6 class="fw-bold">{{ user.name }}</h6>
+                    </div>
+                </div>
+
+                <!-- User Details -->
+                <div class="col-md-6">
+                    <div class="card p-4 shadow-sm h-100"> <!-- h-100 ensures same height -->
+                        <p><strong>Room Number:</strong> {{ student.student_room_no if student.student_room_no else 'Undefined' }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                        <p><strong>Phone Number:</strong> {{ student.student_phone if student.student_phone else 'Undefined' }}</p>
+                    </div>
+                </div>
+
+            </div> 
+        </div>
+    </div>
+</div>
+{% endblock %}

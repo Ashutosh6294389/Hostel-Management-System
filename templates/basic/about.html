@@ -1,0 +1,100 @@
+{% extends "basic/base.html" %}
+
+{% block content %}
+<section class="ezy__about9 light" id="ezy__about9">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-12 col-lg-6">
+          <h6 class="ezy__about9-sub-heading">Hello,</h6>
+          <h1 class="ezy__about9-heading">Welcome to the Hostel Management System</h1>
+          <hr class="ezy__about9-divider my-4" />
+          <p class="ezy__about9-sub-heading">
+            Our Hostel Management System provides an easy and efficient way for students to apply for accommodation, caretakers to manage hostel facilities, and faculty to approve room allocations. This platform ensures seamless hostel operations and transparent communication between stakeholders.
+          </p>
+          <ul class="nav flex-column ezy__about9-features mt-5">
+            <li>
+              <span class="fas fa-check text-primary me-2 mb-3 small"></span>
+              <span class="opacity-75 small">Simplified hostel application and room allocation process.</span>
+            </li>
+            <hr class="my-2" />
+            <li>
+              <span class="fas fa-check text-primary me-2 mb-3 small"></span>
+              <span class="opacity-75 small">Real-time status tracking for student applications.</span>
+            </li>
+            <hr class="my-2" />
+            <li>
+              <span class="fas fa-check text-primary me-2 mb-3 small"></span>
+              <span class="opacity-75 small">Faculty and caretaker dashboards for approvals and room management.</span>
+            </li>
+            <hr class="my-2" />
+            <li>
+              <span class="fas fa-check text-primary me-2 mb-3 small"></span>
+              <span class="opacity-75 small">Automated notifications for approvals, rejections, and payments.</span>
+            </li>
+            <hr class="my-2" />
+            <li>
+              <span class="fas fa-check text-primary me-2 small"></span>
+              <span class="opacity-75 small">Centralized system for hostel occupancy and maintenance tracking.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="mt-5 mt-lg-0">
+            <img src="{{ url_for('static', filename='about.jpg') }}" alt="Hostel Management System Overview" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+.ezy__about9 {
+    --bs-body-color: #1e2329;
+    --bs-body-bg: rgb(255, 255, 255);
+
+    --ezy-theme-color: #198754;
+    --ezy-theme-color-rgb: 25, 135, 84;
+
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    overflow: hidden;
+    padding: 60px 0;
+}
+
+@media (min-width: 768px) {
+    .ezy__about9 {
+        padding: 10px 0;
+    }
+}
+
+.ezy__about9-heading {
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.ezy__about9-sub-heading {
+    opacity: 0.8;
+}
+
+.ezy__about9 img {
+    border-radius: 15px;
+}
+
+.ezy__about9-divider {
+    color: var(--ezy-theme-color);
+    height: 2px !important;
+    border-radius: 3px;
+    width: 50px;
+    opacity: 1;
+}
+
+.ezy__about9 .text-primary {
+    color: var(--ezy-theme-color) !important;
+}
+.ezy__about9-features hr {
+    width: 90%;
+}
+</style>
+{% endblock %}

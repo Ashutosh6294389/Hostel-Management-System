@@ -1,0 +1,77 @@
+<style>
+    .sidebar {
+        width: 260px;
+        background-color: #2b5586; 
+        color: #ecf0f1;  
+        position: fixed;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0; 
+        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.2);
+        font-family: 'Arial', sans-serif;
+    }
+
+    .sidebar h3 {
+        font-size: 1.6rem;
+        font-weight: bold;
+        margin: 0; 
+        background-color: #0f2a45; 
+        color: #ffffff; 
+        padding: 20px 0; 
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 1px;
+        width: 100%; 
+        box-sizing: border-box; 
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        font-size: 1.1rem;
+        color: #ecf0f1;
+        margin: 12px 0;
+        padding: 12px 20px;
+        width: 100%;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        display: flex;
+        align-items: center; 
+        gap: 10px; 
+        box-sizing: border-box;
+    }
+
+    .sidebar a:hover {
+        background-color: #3498db; 
+        color: #1e3a5f; 
+        transform: scale(0.95);
+    }
+
+    .sidebar a:active {
+        background-color: #2980b9; 
+        color: #ffffff;
+    }
+
+    .sidebar a img {
+        width: 20px; 
+        height: 20px; 
+        object-fit: contain; 
+    }
+</style>
+
+<div class="sidebar">
+    <h3>Student Dashboard</h3>
+    <a href="/student">
+        <img src="{{ url_for('static', filename='icons/profile_icon.png') }}" alt="Profile Icon">Manage Profile
+    </a>
+    <a href="/student/internship_form">
+        <img src="{{ url_for('static', filename='icons/form_icon.png') }}" alt="Form Icon">Internship Form
+    </a>
+    <a href="{{ url_for('student.download_application_pdf') }}">
+        <img src="{{ url_for('static', filename='icons/download_icon.png') }}" alt="Download Icon">Download Approved Application
+    </a>
+    <a href="/logout">
+        <img src="{{ url_for('static', filename='icons/logout_icon.png') }}" alt="Logout Icon">Logout
+    </a>
+</div>

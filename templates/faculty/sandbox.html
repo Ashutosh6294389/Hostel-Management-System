@@ -1,0 +1,171 @@
+{% extends "faculty/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Sandbox</h2>
+    <div class="row">
+        <div class="col-12">
+            <h4>Batches</h4>
+            <div id="batches" class="d-flex flex-wrap">
+                {% for batch in batches %}
+                <div class="batch card mb-3 blue-block me-2 draggable" data-batch-id="{{ batch.batch_no }}" draggable="true" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ batch.batch_no }}</h5>
+                        <p class="card-text">{{ batch.number_of_students }} students</p>
+                        <p class="card-text unallocated-count">Unallocated students: {{ batch.unallocated_students|length }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-6">
+            <h4>Unallocated Students</h4>
+            <div id="unallocated-students" class="droppable">
+                <!-- Unallocated students will be displayed here -->
+            </div>
+        </div>
+        <div class="col-6">
+            <h4>Hostels</h4>
+            <div id="hostels" class="droppable">
+                {% for hostel in hostels %}
+                <div class="hostel card mb-3 blue-block" data-hostel-no="{{ hostel.hostel_no }}" data-hostel-type="{{ hostel.hostel_type }}" draggable="true">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ hostel.hostel_name }}</h5>
+                        <p class="card-text">{{ hostel.unoccupied_rooms }} unoccupied rooms</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .blue-block {
+        background-color: #007bff;
+        color: #ffffff;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .blue-block .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .blue-block .card-text {
+        font-size: 1rem;
+    }
+
+    .blue-block:hover {
+        background-color: #0056b3;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const batches = document.querySelectorAll('.batch');
+        const unallocatedStudentsContainer = document.getElementById('unallocated-students');
+        const droppables = document.querySelectorAll('.droppable');
+
+        batches.forEach(batch => {
+            batch.addEventListener('click', () => {
+                const batchId = batch.getAttribute('data-batch-id');
+
+                // Send AJAX request to get unallocated students for the selected batch
+                fetch('/faculty/get_unallocated_students', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ batch_id: batchId })
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        // Clear the previous unallocated students
+                        unallocatedStudentsContainer.innerHTML = '';
+
+                        // Display the number of unallocated students
+                        const unallocatedCountElement = document.createElement('div');
+                        unallocatedCountElement.classList.add('card', 'mb-3', 'blue-block', 'draggable');
+                        unallocatedCountElement.setAttribute('data-batch-id', batchId);
+                        unallocatedCountElement.setAttribute('draggable', 'true');
+                        unallocatedCountElement.innerHTML = `
+                            <div class="card-body">
+                                <h5 class="card-title">Unallocated Students</h5>
+                                <p class="card-text">Number of unallocated students: ${data.unallocated_students.length}</p>
+                            </div>
+                        `;
+                        unallocatedStudentsContainer.appendChild(unallocatedCountElement);
+
+                        // Reinitialize draggable elements
+                        initializeDraggables();
+                    } else {
+                        alert(data.message);
+                    }
+                });
+            });
+        });
+
+        function initializeDraggables() {
+            const draggables = document.querySelectorAll('.draggable');
+
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', () => {
+                    draggable.classList.add('dragging');
+                });
+
+                draggable.addEventListener('dragend', () => {
+                    draggable.classList.remove('dragging');
+                });
+            });
+        }
+
+        droppables.forEach(droppable => {
+            droppable.addEventListener('dragover', e => {
+                e.preventDefault();
+            });
+
+            droppable.addEventListener('drop', e => {
+                e.preventDefault();
+                const dragging = document.querySelector('.dragging');
+                const batchId = dragging.getAttribute('data-batch-id');
+                const hostelElement = e.target.closest('.hostel');
+                if (!hostelElement) {
+                    alert('Failed to identify the hostel. Please try again.');
+                    return;
+                }
+                const hostelNo = hostelElement.getAttribute('data-hostel-no');
+                const hostelType = hostelElement.getAttribute('data-hostel-type');
+
+                // Send AJAX request to allocate room
+                fetch('/faculty/allocate_room', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify({ batch_id: batchId, hostel_no: hostelNo, hostel_type: hostelType })
+                }).then(response => response.json()).then(data => {
+                    if (data.success) {
+                        alert('Room allocated successfully');
+                        // Update the unallocated students count
+                        const batchElement = document.querySelector(`.batch[data-batch-id="${batchId}"]`);
+                        const unallocatedCountElement = batchElement.querySelector('.unallocated-count');
+                        unallocatedCountElement.textContent = `Unallocated students: ${data.updated_students.length}`;
+                    } else {
+                        alert(data.message);
+                    }
+                });
+            });
+        });
+
+        // Initialize draggable elements on page load
+        initializeDraggables();
+    });
+</script>
+{% endblock %}

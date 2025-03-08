@@ -1,0 +1,112 @@
+<div class="ezy__nav4 light">
+	<nav class="navbar navbar-expand-lg py-3">
+		<div class="container">
+			<a class="navbar-brand" href="/">
+				<img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo-img">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#ezy_nav4-navbar-text"
+				aria-controls="ezy_nav4-navbar-text" aria-expanded="false" aria-label="Toggle navigation">
+				<span><span></span></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="ezy_nav4-navbar-text">
+				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+				</ul>
+
+				<a href="/login" class="btn custom-login-btn ms-lg-3">Login</a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<style>
+.ezy__nav4 {
+	background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+	border-bottom: 1px solid #e0e0e0; 
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+.ezy__nav4 .navbar-brand img {
+	height: 50px;
+	width: auto;
+	display: block;
+}
+
+.ezy__nav4 .navbar-nav .nav-link {
+	font-size: 16px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #343a40;
+	margin: 0 10px;
+	transition: color 0.3s ease;
+}
+
+.ezy__nav4 .navbar-nav .nav-link:hover,
+.ezy__nav4 .navbar-nav .nav-link:focus,
+.ezy__nav4 .navbar-nav .nav-link.active {
+	color: #ff6b6b; 
+}
+
+.custom-login-btn {
+	background: linear-gradient(135deg, #ff6b6b, #d32f2f);
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 8px;
+	padding: 8px 18px;
+	border: none;
+	transition: all 0.3s ease-in-out;
+	text-transform: uppercase;
+}
+
+.custom-login-btn:hover {
+	background: linear-gradient(135deg, #d32f2f, #b71c1c);
+	color: #ffffff;
+	box-shadow: 0 4px 10px rgba(211, 47, 47, 0.5);
+	transform: scale(1.05);
+}
+
+.ezy__nav4 .navbar-toggler {
+	border: none;
+	outline: none;
+}
+
+.ezy__nav4 .navbar-toggler span {
+	display: flex;
+	align-items: center;
+	height: 24px;
+}
+
+.ezy__nav4 .navbar-toggler span span {
+	height: 2px;
+	background-color: #343a40;
+	width: 20px;
+	border-radius: 5px;
+	position: relative;
+}
+
+.ezy__nav4 .navbar-toggler span span::before,
+.ezy__nav4 .navbar-toggler span span::after {
+	content: '';
+	position: absolute;
+	width: 20px;
+	height: 2px;
+	background-color: #343a40;
+	border-radius: 5px;
+}
+
+.ezy__nav4 .navbar-toggler span span::before {
+	top: -5px;
+}
+
+.ezy__nav4 .navbar-toggler span span::after {
+	top: 5px;
+}
+</style>

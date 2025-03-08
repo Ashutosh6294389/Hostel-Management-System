@@ -1,0 +1,103 @@
+{% extends "basic/base.html" %}
+
+{% block content %}
+<section class="ezy__contact1 light">
+	<div class="container position-relative">
+		<div class="row align-items-center">
+			<div class="col-lg-6 mb-3 mb-lg-0">
+				<img src="{{ url_for('static', filename='contact.jpg') }}" alt="Contact Us"
+					class="img-fluid ezy__contact1-banner mx-auto" />
+			</div>
+			<div class="col-lg-6 position-relative">
+				<div class="ezy__contact1-shape"></div>
+				<div class="row position-relative">
+					<div class="col-md-10 mx-auto">
+						<div class="ezy__contact1-content rounded text-white my-4 py-3">
+							<div class="mb-4 text-center">
+								<h2 class="ezy__contact1-heading mb-3">Get in Touch</h2>
+								<p class="ezy__contact1-sub-heading">Need assistance with hostel applications, room allocations, or general queries? We’re here to help!</p>
+							</div>
+							<form class="pe-md-4" action="/contact_us" method="POST">
+								<div class="form-group mb-3">
+									<input type="text" name="name" class="form-control" placeholder="Your Name" required />
+								</div>
+								<div class="form-group mb-3">
+									<input type="email" name="email" class="form-control" placeholder="Your Email" required />
+								</div>
+								<div class="form-group mb-3">
+									<textarea name="message" class="form-control" placeholder="Your Message" rows="3" required></textarea>
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn ezy__contact1-btn mb-3">Send Message</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+.ezy__contact1 {
+	background-color: #f8f9fa;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.ezy__contact1-content {
+	background: #343a40;
+	padding: 20px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ezy__contact1-heading {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.ezy__contact1-sub-heading {
+	font-size: 14px;
+	opacity: 0.9;
+}
+
+.ezy__contact1 .form-control {
+	min-height: 40px;
+	border-color: #ced4da;
+	background: #ffffff;
+	border-radius: 8px;
+	color: #495057;
+	font-size: 14px;
+	padding: 8px 15px;
+}
+
+.ezy__contact1 .form-control:focus {
+	border-color: #86b7fe;
+	box-shadow: none;
+}
+
+.ezy__contact1 select.form-control {
+	background-color: #ffffff;
+	color: #495057;
+}
+
+.ezy__contact1-btn {
+	background-color: #198754;
+	color: #ffffff;
+	border-radius: 5px;
+	padding: 10px 25px;
+	font-size: 14px;
+	font-weight: 600;
+	transition: background-color 0.3s ease;
+}
+
+.ezy__contact1-btn:hover {
+	background-color: #157347;
+}
+
+.ezy__contact1-banner {
+	border-radius: 15px;
+}
+</style>
+{% endblock %}

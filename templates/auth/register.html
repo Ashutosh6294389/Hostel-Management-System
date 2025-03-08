@@ -1,0 +1,53 @@
+{% extends "auth/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<!-- Registration Form -->
+<div class="col-md-8 col-lg-5 py-4">
+    <div class="row align-items-center h-100 px-xl-4">
+        <div class="col-12">
+            <div class="card ezy__signin10-form-card">
+                <div class="card-body p-md-4 text-center">
+                    <h2 class="ezy__signin10-heading mb-3">Create Your Account</h2>
+
+                    {% if not otp_generated %}
+                    <!-- Step 1: User Enters Details to Generate OTP -->
+                    <form method="POST" action="/register">
+                        <!-- Name Input -->
+                        <div class="form-group mb-4 mt-2">
+                            <input type="text" name="name" class="form-control" placeholder="Enter Your Name" required>
+                        </div>
+                        <!-- Email Input -->
+                        <div class="form-group mb-4 mt-2">
+                            <input type="email" name="email" class="form-control" placeholder="Enter your institute email id"
+                                pattern=".+@iitrpr\.ac\.in" title="Use only institute email id" required>
+                        </div>
+                        <!-- Password Input -->
+                        <div class="form-group mb-4 mt-2">
+                            <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                        </div>
+                        <!-- Generate OTP Button -->
+                        <button type="submit" name="generate_otp" class="btn ezy__signin10-btn-submit w-100">Generate OTP</button>
+                    </form>
+                    {% else %}
+                    <!-- Step 2: User Enters OTP -->
+                    <form method="POST" action="/register">
+                        <div class="form-group mb-4 mt-2">
+                            <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
+                        </div>
+                        <!-- Verify OTP Button -->
+                        <button type="submit" name="verify_otp" class="btn ezy__signin10-btn-submit w-100">Verify OTP</button>
+                    </form>
+                    {% endif %}
+
+                    <p class="mt-4">
+                        <span>Already have an account?</span>
+                        <a href="/login" class="ezy__signin10-register-link">Login Now</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

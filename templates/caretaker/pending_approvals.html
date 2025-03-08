@@ -1,0 +1,88 @@
+{% extends "caretaker/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Pending Approvals</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Search Form -->
+            <form method="GET" action="{{ url_for('caretaker.pending_approvals') }}" class="d-flex mb-3">
+                <input type="text" name="search" class="form-control me-2" placeholder="Search by name or email" value="{{ search_query }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+
+            <!-- Sorting Dropdown -->
+            <div class="mb-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{{ url_for('caretaker.pending_approvals', sort_by='name', sort_order='asc' if sort_order == 'desc' else 'desc') }}">
+                                Name {% if sort_by == 'name' %} ({{ '▲' if sort_order == 'asc' else '▼' }}) {% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ url_for('caretaker.pending_approvals', sort_by='email', sort_order='asc' if sort_order == 'desc' else 'desc') }}">
+                                Email {% if sort_by == 'email' %} ({{ '▲' if sort_order == 'asc' else '▼' }}) {% endif %}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ url_for('caretaker.pending_approvals', sort_by='status', sort_order='asc' if sort_order == 'desc' else 'desc') }}">
+                                Status {% if sort_by == 'status' %} ({{ '▲' if sort_order == 'asc' else '▼' }}) {% endif %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Table -->
+            {% if pending_applications %}
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Student Name</th>
+                            <th>Department</th>
+                            <th>Arrival</th>
+                            <th>Departure</th>
+                            <th>Status</th>
+                            <th>Room No</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for application in pending_applications %}
+                        <tr>
+                            <td>{{ application.id }}</td>
+                            <td>{{ application.name }}</td>
+                            <td>{{ application.affiliation }}</td>
+                            <td>{{ application.arrival_date }}</td>
+                            <td>{{ application.departure_date }}</td>
+                            <td>{{ application.status }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('caretaker.approve_application', application_id=application.id) }}">
+                                    <input type="text" name="room_no" class="form-control" placeholder="Enter Room No" required>
+                            </td>
+                            <td class="text-center">
+                                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                No pending requests.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

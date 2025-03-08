@@ -1,0 +1,66 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Internship Form</h2>
+    <form method="POST" action="{{ url_for('student.submit_internship_form') }}" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-control" id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="affiliation" class="form-label">Affiliation of the student intern</label>
+            <input type="text" class="form-control" id="affiliation" name="affiliation" required>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+        <div class="mb-3">
+            <label for="contact_number" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" id="contact_number" name="contact_number" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="faculty_mentor" class="form-label">Name of Faculty Mentor</label>
+            <input type="text" class="form-control" id="faculty_mentor" name="faculty_mentor" required>
+        </div>
+        <div class="mb-3">
+            <label for="faculty_email" class="form-label">Faculty Member Email</label>
+            <input type="email" class="form-control" id="faculty_email" name="faculty_email" required>
+        </div>
+        <div class="mb-3">
+            <label for="arrival_date" class="form-label">Date of Arrival</label>
+            <input type="date" class="form-control" id="arrival_date" name="arrival_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="departure_date" class="form-label">Date of Departure</label>
+            <input type="date" class="form-control" id="departure_date" name="departure_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_card" class="form-label">Copy of Institute ID Card</label>
+            <input type="file" class="form-control" id="id_card" name="id_card" required>
+        </div>
+        <div class="mb-3">
+            <label for="official_letter" class="form-label">Copy of Official Letter from Institute</label>
+            <input type="file" class="form-control" id="official_letter" name="official_letter" required>
+        </div>
+        <div class="mb-3">
+            <label for="remarks" class="form-label">Remarks</label>
+            <textarea class="form-control" id="remarks" name="remarks"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

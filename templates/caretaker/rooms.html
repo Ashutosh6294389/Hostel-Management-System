@@ -1,0 +1,39 @@
+{% extends "caretaker/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>All Rooms</h2>
+    <div class="row">
+        <div class="col-md-12">
+            {% if rooms %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Room No</th>
+                        <th>Floor</th>
+                        <th>Hostel No</th>
+                        <th>Current Occupancy</th>
+                        <th>Max Occupancy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for room in rooms %}
+                    <tr>
+                        <td>{{ room.room_no }}</td>
+                        <td>{{ room.floor }}</td>
+                        <td>{{ room.hostel_no }}</td>
+                        <td>{{ room.current_occupancy }}</td>
+                        <td>{{ room.room_occupancy }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="alert alert-info" role="alert">
+                No rooms found.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

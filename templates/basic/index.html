@@ -1,0 +1,181 @@
+{% extends "basic/base.html" %}
+
+{% block content %}
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+    main {
+        flex: 1;
+    }
+
+    .hero-section {
+        background: url('{{ url_for('static', filename='hero.jpg') }}') center/cover no-repeat;
+        color: #ffffff;
+        text-align: center;
+        padding: 100px 20px;
+        position: relative;
+    }
+
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-section h1 {
+        position: relative;
+        font-size: 48px;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 1.2;
+    }
+
+    .hero-section h1 span {
+        color: #ff6b6b;
+    }
+
+    .hero-section h6 {
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.8;
+    }
+
+    .features-section {
+        background-color: #f8f9fa;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .feature-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: #ffffff;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .row.g-4 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-3 {
+        display: flex;
+    }
+
+    .feature-card.student {
+        background: linear-gradient(135deg, #e3f2fd, #90caf9);
+    }
+
+    .feature-card.caretaker {
+        background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+    }
+
+    .feature-card.faculty {
+        background: linear-gradient(135deg, #ffebee, #ef5350);
+    }
+
+    .feature-card.admin {
+        background: linear-gradient(135deg, #fff8e1, #ffe082);
+    }
+
+    .feature-card h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #343a40;
+    }
+
+    .feature-card p {
+        color: #6c757d;
+        margin: 15px 20px;
+        flex-grow: 1; 
+    }
+
+    .feature-card .btn {
+        color: #343a40;
+        font-weight: bold;
+        text-decoration: none;
+        margin-bottom: 20px;
+        display: inline-block;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .feature-card.student .btn:hover {
+        color: #1565c0;
+    }
+
+    .feature-card.caretaker .btn:hover {
+        color: #2e7d32;
+    }
+
+    .feature-card.faculty .btn:hover {
+        color: #d32f2f;
+    }
+
+    .feature-card.admin .btn:hover {
+        color: #f9a825;
+    }
+</style>
+
+<section class="hero-section">
+    <div class="container">
+        <h6>Hostel Management System</h6>
+        <h1>Effortless <span>Room Allocation</span> & Seamless Hostel Management</h1>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 d-flex">
+                <div class="card feature-card student w-100">
+                    <h3>Student</h3>
+                    <p>Apply for hostel accommodation, track application status, and view room details.</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="card feature-card caretaker w-100">
+                    <h3>Caretaker</h3>
+                    <p>Manage hostel rooms, maintain facilities, and assist students with accommodations.</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="card feature-card faculty w-100">
+                    <h3>Faculty</h3>
+                    <p>Oversee student applications, approve hostel requests, and manage allocations.</p>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex">
+                <div class="card feature-card admin w-100">
+                    <h3>Admin</h3>
+                    <p>Verify user registrations, manage hostel operations, and oversee system processes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

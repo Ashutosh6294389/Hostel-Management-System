@@ -1,0 +1,38 @@
+{% extends "auth/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<!-- Login Form -->
+<div class="col-md-8 col-lg-5 py-4">
+    <div class="row align-items-center h-100 px-xl-4">
+        <div class="col-12">
+            <div class="card ezy__signin10-form-card">
+                <div class="card-body p-md-4 text-center">
+                    <h2 class="ezy__signin10-heading mb-3">Login to your account</h2>
+                    <form method="POST" action="/login">
+                        <!-- Email Input -->
+                        <div class="form-group mb-4 mt-2">
+                            <input type="email" name="email" class="form-control" id="email" 
+                                placeholder="Enter your institute email id"
+                                pattern=".+@iitrpr\.ac\.in" 
+                                title="Use only institute email id"
+                                required>
+                        </div>
+                        <!-- Password Input -->
+                        <div class="form-group mb-4 mt-2">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required>
+                        </div>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn ezy__signin10-btn-submit w-100">Log In</button>
+                    </form>
+                    <p class="mt-4">
+                        <span>New here?</span>
+                        <a href="/register" class="ezy__signin10-register-link">Register Now</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+<style>
+    .sidebar {
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background-color: #343a40;
+        padding-top: 20px;
+        color: white;
+    }
+
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .sidebar a:hover {
+        background-color: #575d63;
+    }
+</style>
+
+<div class="sidebar">
+    <h3>Faculty Dashboard</h3>
+    <a href="/faculty">Profile</a>
+    <a href="/faculty/pending_approvals">Pending Approvals</a>
+    {% if session.get('user_role') == 'faculty' and faculty.is_hod %}
+    <a href="{{ url_for('faculty.hod_pending_approvals') }}">HOD Pending Approvals</a>
+    {% endif %}
+    {% if session.get('user_role') == 'faculty' and faculty.warden %}
+    <a href="/faculty/sandbox">View by Sandbox</a>
+    {% endif %}
+    <a href="/logout">Logout</a>
+</div>
